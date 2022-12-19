@@ -273,6 +273,7 @@ public class RealEstate {
     int typeOfHouse= scanner.nextInt();
     if (typeOfHouse != 1 || typeOfHouse != 2 || typeOfHouse != 3) {
       System.out.println("please enter an option between 1-3!");
+    }
     System.out.println("for rent or for sell");
     String sellOrRent = scanner.nextLine();
     if (sellOrRent.contains("rent") || sellOrRent.contains("sell")){
