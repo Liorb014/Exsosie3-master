@@ -4,18 +4,10 @@ public class RealEstate {
   private  User[] usersArray;
   private Property[] properties;
   private City[] cities;
-  int postCount = 0 ;
 
-  public RealEstate(User user , City city){
-   // cities = new City[10];
-    String[] arrayOfCity = {"Ashdod" , " Tel-Aviv", "Eilat" ,"Ashkelon","Jerusalem","Rehovot","Haifa" ,"Bat-Yam" , "Baer-Sheva","Sderot"};
-    String[] arrayOfStreets = {"Rimon street" , "Narkis street", "Rotem street" ,"Golani street","Givati street","Oliy Agardom street","Dov Brayer street" ,"Kalanit street" , "Tamar street","Africa street"};
-    String[] arrayOfArea = {"south", "midland", "north" ,"sharon" ,"negev" };
-    for (int i = 0; i <arrayOfCity.length ; i++) {
-      if (arrayOfCity[i]=="Ashdod"||arrayOfCity[i]=="Ashkelon")
-      cities[i] = new City(arrayOfCity[i], arrayOfArea[2] ,arrayOfStreets);
 
-    }
+  public RealEstate(User user, City city) {
+    matchArea();
   }
   private static String machArea (String[] listOfCities) {
     for (int i = 0; i <listOfCities.length; i++) {
@@ -126,17 +118,75 @@ public class RealEstate {
     return loginInfoValid;
   }
 
-  boolean postNewProperty(User user){
+  int postCount = 0;
 
-    if(( user.getIsBrokers() && postCount==5 ) || ( !user.getIsBrokers() && postCount==2 )){
+  boolean postNewProperty(User user) {
+    int counterOfCities=0;
+    Scanner scanner = new Scanner(System.in);
+    if ((user.getIsBrokers() && postCount == 5) || (!user.getIsBrokers() && postCount == 2)) {
       return false;
     }
-    System.out.println(cities);
-
-
+    for (int i = 0; i < cities.length; i++) {
+      System.out.println(cities[i].getCityName());
+      System.out.println("please enter your city of your property: ");
+      String cityOfNewProperty = scanner.nextLine();
+      if (cityOfNewProperty.equals(cities[i].getCityName())) {
+        System.out.println(cities[i].getListOfStreets());
+        System.out.println("please enter the street name of your new property:");
+        String streetOfNewProperty =scanner.nextLine();
+        if (streetOfNewProperty.equals(cities[i].getListOfStreets())){
+          System.out.println("please choose with type of house u have: "+"\n enter 1 to an apartment"+"\n enter 2 to a penthouse"+"\n enter 3 to a detachment home");
+          int typeOfHouse= scanner.nextInt();
+          if (typeOfHouse != 1 || typeOfHouse != 2 || typeOfHouse != 3) {
+            System.out.println("please enter an option between 1-3!");
+            return false;
+          }else {
+            if(typeOfHouse==1){
+              System.out.println("please enter the floor number of your property");
+              int floorNumber =scanner.nextInt();
+              propertyOfUserInfo();
+            }
+            if(typeOfHouse==2){
+              propertyOfUserInfo();
+            }
+            if(typeOfHouse==3){
+              propertyOfUserInfo();
+            }
+          }
+        }else {
+          System.out.println("your property is not in our system database ");
+          return false;
+        }
+      } else if (counterOfCities==cities.length) {
+        System.out.println("your property is not in our system database ");
+        return false;
+      } else {
+        counterOfCities++;
+      }
+      properties[i]= new Property(cities[i],usersArray[i]);
+    }
     return true;
   }
-  void removeProperty(User use){
+  private static void propertyOfUserInfo(){
+    Scanner scanner = new Scanner(System.in);
+    System.out.println("How much rooms are there in this property");
+    double numberOfRooms = scanner.nextDouble();
+    System.out.println("Please enter the number of the property: ");
+    int numberOfProperty = scanner.nextInt();
+    System.out.println("If the property is for rent enter 1 if it for sale enter 2");
+    int forRentOrForSale = scanner.nextInt();
+    while(forRentOrForSale!= 1 && forRentOrForSale != 2){
+      System.out.println("If for rent enter 1 - if for sale enter 2");
+      forRentOrForSale = scanner.nextInt();
+    }
+    boolean isPropertyForRent = false;
+    if(forRentOrForSale == 1){
+      isPropertyForRent = true;
+    }
+    System.out.println("Please enter the price of the property: ");
+    int priceOfProperty = scanner.nextInt();
+
+  }
 
   }
   void printAllProperties(){

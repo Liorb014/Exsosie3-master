@@ -85,10 +85,33 @@ public class Property {
     }
     public String toString(){
         String broker;
-        if (isBrokers){
-              broker= "(real estate agent)";
-        }else broker= "(not an agent)";
-        return getCity() + "  - " + street + " "  + houseNumber  +"\n" +getType() +"- " +getIsForRent() +" , " +amountOfRooms + " rooms ,  "+getFloor() +
-                "\nPrice : " + price +"$\nContact info : " + sellerName +" " +broker+" - "+ phoneNumber;
+        if (isBrokers) {
+            broker = "(real estate agent)";
+        } else broker = "(not an agent)";
+        String floorNumber;
+        if (type == 3) {
+            floorNumber = "";
+        } else {
+            floorNumber = "floor" + floor;
+        }
+
+        String houseType=null;
+        if (type == 3) {
+            houseType = "detached home";
+        } else if (type == 1) {
+            houseType = "apartment ";
+        } else if (type == 2) {
+            houseType = "penthouse";
+        }
+
+        String forRent ;
+        if (isForRenting){
+forRent = "for renting";
+        }else {
+forRent = "for selling";
+        }
+
+        return getCity() + "  - " + street + " " + houseNumber + "." + "\n" + houseType + " - " + forRent + ": " + amountOfRooms + " rooms ,  " + floorNumber +
+                "\nPrice: " + price + "$\nContact info: " + sellerName + " " + phoneNumber + " " + broker;
     }
 }
