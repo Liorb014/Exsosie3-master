@@ -155,7 +155,7 @@ public class RealEstate {
         System.out.println("please enter the street name of your new property:");
         String streetOfNewProperty =scanner.nextLine();
         if (streetOfNewProperty.equals(cities[i].getListOfStreets())){
-          System.out.println("please choose with type of house u have: "+"\n enter 1 to an apartment"+"\n enter 2 to a penthouse"+"\n enter 3 to a detachment home");
+          System.out.println("please choose which type of house u have: "+"\n enter 1 to an apartment"+"\n enter 2 to a penthouse"+"\n enter 3 to a detachment home");
           int typeOfHouse= scanner.nextInt();
           if (typeOfHouse != 1 || typeOfHouse != 2 || typeOfHouse != 3) {
             System.out.println("please enter an option between 1-3!");
@@ -269,6 +269,10 @@ public class RealEstate {
   }
   Property[] search (){
     Scanner scanner = new Scanner(System.in);
+    System.out.println("please choose which type of house u have: "+"\n enter 1 to an apartment"+"\n enter 2 to a penthouse"+"\n enter 3 to a detachment home");
+    int typeOfHouse= scanner.nextInt();
+    if (typeOfHouse != 1 || typeOfHouse != 2 || typeOfHouse != 3) {
+      System.out.println("please enter an option between 1-3!");
     System.out.println("for rent or for sell");
     String sellOrRent = scanner.nextLine();
     if (sellOrRent.contains("rent") || sellOrRent.contains("sell")){
