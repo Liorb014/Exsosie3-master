@@ -13,7 +13,7 @@ public class City {
         return this.cityName;
     }
     public String getArea(){
-        return area;
+        return this.area;
     }
     public String getListOfStreets(){
         return Arrays.toString(listOfStreets);

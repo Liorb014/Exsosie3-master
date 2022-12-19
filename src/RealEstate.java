@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class RealEstate {
-  private  User[] usersArray;
+  private User[] usersArray;
   private Property[] properties;
   private City[] cities;
 
@@ -35,12 +35,13 @@ public class RealEstate {
       }
     }
   }
-  public void createUser(){
+
+  public void createUser() {
     Scanner scanner = new Scanner(System.in);
     System.out.println("please enter a user name: ");
-    String username ;
+    String username;
     boolean alreadyUse;
-    if(usersArray[0]!=null) {
+    if (usersArray[0] != null) {
       do {
         username = scanner.nextLine();
         alreadyUse = false;
@@ -53,12 +54,12 @@ public class RealEstate {
           }
         }
       } while (alreadyUse);
-    }else {
+    } else {
       username = scanner.nextLine();
 
     }
     System.out.println("please enter a password that contains at least one number or one of the next signs:($,%,_) and have a length of 5 digits: ");
-    String password=scanner.nextLine();
+    String password = scanner.nextLine();
     while (isValidPassword(password)) {
       System.out.println("this password is not strong enough please try again and make sure you doing it in the right demands  ");
       password = scanner.nextLine();
@@ -72,46 +73,47 @@ public class RealEstate {
     }
     System.out.println("are u a broker Y/N?");
     String isBroker = scanner.nextLine();
-    boolean broker=false;
-    while (!isBroker.equals("y") && !isBroker.equals("n")){
+    boolean broker = false;
+    while (!isBroker.equals("y") && !isBroker.equals("n")) {
       System.out.println("please enter only 'y' or 'n'!");
-      isBroker=scanner.nextLine();
+      isBroker = scanner.nextLine();
     }
     if (isBroker.equals("y")) {
       broker = true;
     }
-    if (isBroker.equals("n")){
+    if (isBroker.equals("n")) {
       broker = false;
     }
-    User newUser= new User(username,password,phoneNumber, broker);
+    User newUser = new User(username, password, phoneNumber, broker);
     for (int i = 0; i < usersArray.length; i++) {
-      if(usersArray[i]==null){
-        usersArray[i]=newUser;
+      if (usersArray[i] == null) {
+        usersArray[i] = newUser;
       }
     }
   }
 
   private static boolean isValidPassword(String password) {
     boolean isValid = true;
-    if (password.length()>5 && (password.contains("%") || password.contains("$") || password.contains("-"))
+    if (password.length() > 5 && (password.contains("%") || password.contains("$") || password.contains("-"))
             && (password.contains("1") || password.contains("2") || password.contains("3") || password.contains("4") ||
             password.contains("5") || password.contains("6") || password.contains("7") || password.contains("8") ||
-            password.contains("9"))){
-      isValid =false;
-    }
-    return isValid;
-  }
-  private static boolean validPhoneNumber (String phoneNumber) {
-    boolean isValid = true;
-    if ((phoneNumber.startsWith("05"))&&(phoneNumber.length() == 10) &&( phoneNumber.contains("1") || phoneNumber.contains("2") || phoneNumber.contains("3")
-            || phoneNumber.contains("4") || phoneNumber.contains("5") || phoneNumber.contains("6")
-            || phoneNumber.contains("7")|| phoneNumber.contains("8")|| phoneNumber.contains("9")|| phoneNumber.contains("0"))){
-      isValid =false;
+            password.contains("9"))) {
+      isValid = false;
     }
     return isValid;
   }
 
-  User login(){
+  private static boolean validPhoneNumber(String phoneNumber) {
+    boolean isValid = true;
+    if ((phoneNumber.startsWith("05")) && (phoneNumber.length() == 10) && (phoneNumber.contains("1") || phoneNumber.contains("2") || phoneNumber.contains("3")
+            || phoneNumber.contains("4") || phoneNumber.contains("5") || phoneNumber.contains("6")
+            || phoneNumber.contains("7") || phoneNumber.contains("8") || phoneNumber.contains("9") || phoneNumber.contains("0"))) {
+      isValid = false;
+    }
+    return isValid;
+  }
+
+  User login() {
     Scanner scanner = new Scanner(System.in);
     System.out.println("please enter your username: ");
     String usernameLogin = scanner.next();
@@ -119,20 +121,20 @@ public class RealEstate {
     String passwordLogin = scanner.next();
     boolean isUsernameValid = false;
     boolean isPasswordValid = false;
-    int count =0 ;
-    for (int i = 0 ; i < usersArray.length ; i++) {
-      if(usersArray[i].getUserName().equals(usernameLogin)){
+    int count = 0;
+    for (int i = 0; i < usersArray.length; i++) {
+      if (usersArray[i].getUserName().equals(usernameLogin)) {
         isUsernameValid = true;
         count = i;
         break;
       }
     }
-    if(usersArray[count].getPassword().equals(passwordLogin)){
+    if (usersArray[count].getPassword().equals(passwordLogin)) {
       isPasswordValid = true;
     }
     User loginInfoValid = null;
-    if(isUsernameValid && isPasswordValid){
-      loginInfoValid =usersArray[count];
+    if (isUsernameValid && isPasswordValid) {
+      loginInfoValid = usersArray[count];
     }
     return loginInfoValid;
   }
@@ -207,6 +209,51 @@ public class RealEstate {
 
   }
 
+  void removeProperty(User user) {
+    Scanner scanner = new Scanner(System.in);
+    boolean existProperty = false;
+    int counter = 1;
+    for (int i = 0; i < properties.length; i++) {
+      if (user.getUserName().equals(properties[i].getSellerName())) {
+        existProperty = true;
+        System.out.println("press " + counter + " to delete: " + properties[i]);
+        counter++;
+      }
+      if (!existProperty) {
+        System.out.println("you dont have any post");
+      } else {
+        int indexFromUser;
+        do {
+          indexFromUser = scanner.nextInt();
+          if (indexFromUser >= 1 && indexFromUser <= counter) {
+            System.out.println("try again");
+          }
+        } while (indexFromUser >= 1 && indexFromUser <= counter);
+        int toEqualCounter = 1;
+        int saveIndexToRemove;
+        for (int j = 0; j < properties.length; j++) {
+          if (user.getUserName().equals(properties[j].getSellerName())){
+            if(counter == toEqualCounter){
+              properties[j] = null;
+              saveIndexToRemove = j;
+              break;
+            }
+            toEqualCounter++;
+          }
+        }
+        Property tempProperty[] = new Property[properties.length - 1];
+        for (int j = 0; j < properties.length - 1; j++) {
+          if(j < indexFromUser){
+            tempProperty[j] = properties[j];
+          }
+          else{
+            tempProperty[j] = properties[j + 1];
+          }
+        }
+        properties = tempProperty;
+        System.out.println("property removed");
+      }
+    }
   }
   void printAllProperties(){
 
