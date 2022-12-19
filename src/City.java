@@ -22,6 +22,6 @@ public class City {
         return "City name : " + cityName + "\nArea : " + area +"\n List of streets :" + getListOfStreets() ;
     }
 }
-// I think this file is completed
+
 
 

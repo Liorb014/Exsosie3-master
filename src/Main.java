@@ -20,7 +20,7 @@ public class Main {
         RealEstate real = new RealEstate( user1 ,  ashdod);
 
     }
-    /*
+
     public static void menu(int userChoose){
         do {
             if (userChoose==1){
@@ -37,6 +37,5 @@ public class Main {
     }
     public static void login(){
 
-    }*/
+    }
 }
-// need to remove everything from here and move it to RealEstate

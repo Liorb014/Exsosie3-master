@@ -9,12 +9,31 @@ public class RealEstate {
   public RealEstate(User user, City city) {
     matchArea();
   }
-  private static String machArea (String[] listOfCities) {
-    for (int i = 0; i <listOfCities.length; i++) {
-      if (listOfCities[i] == "Ashdod" || listOfCities[i] == "Ashkelon") {
+
+  private void matchArea() {
+    String[] arrayOfCity = {"Ashdod", "Tel-Aviv", "Eilat", "Ashkelon", "Jerusalem", "Rehovot", "Haifa", "Bat-Yam", "Baer-Sheva", "Herzelia"};
+    String[] arrayOfStreets = {"Rimon street", "Narkis street", "Rotem street", "Golani street", "Givati street", "Oliy Agardom street", "Dov Brayer street", "Kalanit street", "Tamar street", "Africa street"};
+    String[] arrayOfArea = {"south", "midland", "north", "sharon", "negev"};
+
+    if (cities != null) {
+      for (int i = 0; i < arrayOfCity.length; i++) {
+        if (arrayOfCity[i].equals("Ashdod") || arrayOfCity[i].equals("Ashkelon")) {
+          cities[i] = new City(arrayOfCity[i], arrayOfArea[0], arrayOfStreets);
+        }
+        if (arrayOfCity[i].equals("Tel-Aviv") || arrayOfCity[i].equals("Jerusalem") || arrayOfCity[i].equals("Rehovot") || arrayOfCity[i].equals("Bat-Yam")) {
+          cities[i] = new City(arrayOfCity[i], arrayOfArea[1], arrayOfStreets);
+        }
+        if (arrayOfCity[i].equals("Haifa")) {
+          cities[i] = new City(arrayOfCity[i], arrayOfArea[2], arrayOfStreets);
+        }
+        if (arrayOfCity[i].equals("Herzelia")) {
+          cities[i] = new City(arrayOfCity[i], arrayOfArea[3], arrayOfStreets);
+        }
+        if (arrayOfCity[i].equals("Eilat") || arrayOfCity[i].equals("Baer-Sheva")) {
+          cities[i] = new City(arrayOfCity[i], arrayOfArea[4], arrayOfStreets);
+        }
       }
     }
-    return "hey";
   }
   public void createUser(){
     Scanner scanner = new Scanner(System.in);
@@ -199,5 +218,4 @@ public class RealEstate {
 
     return new Property[0];
   }
-
 }
