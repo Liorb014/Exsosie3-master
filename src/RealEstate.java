@@ -140,7 +140,6 @@ public class RealEstate {
   }
 
   int postCount = 0;
-
   boolean postNewProperty(User user) {
     int counterOfCities=0;
     Scanner scanner = new Scanner(System.in);
@@ -257,12 +256,27 @@ public class RealEstate {
   }
   void printAllProperties(){
 
+    for (int i = 0; i < properties.length; i++) {
+      System.out.println(properties[i]);
+    }
   }
   void printProperties (User user){
-
+    for (int i = 0; i < properties.length; i++) {
+      if (user.getUserName()==properties[i].getSellerName()){
+        System.out.println(properties[i]);
+      }
+    }
   }
   Property[] search (){
+    Scanner scanner = new Scanner(System.in);
+    System.out.println("for rent or for sell");
+    String sellOrRent = scanner.nextLine();
+    if (sellOrRent.contains("rent") || sellOrRent.contains("sell")){
 
+    }
+    System.out.println();
+    System.out.println();
+    System.out.println();
     return new Property[0];
   }
 }
