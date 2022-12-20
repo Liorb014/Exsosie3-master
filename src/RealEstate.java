@@ -3,8 +3,7 @@ import java.util.Scanner;
 public class RealEstate {
   private User[] usersArray;
   private Property[] properties;
-  private City[] cities;
-
+  public City[] cities;//=new City[10]
 
   public RealEstate() {
     matchArea();
