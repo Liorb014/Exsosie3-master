@@ -26,4 +26,8 @@ public class User {
     public String getPhoneNumber() {
         return phoneNumber;
     }
+
+    public String toString() {
+        return "username: " + userName;
+    }
 }

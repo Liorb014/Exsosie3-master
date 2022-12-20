@@ -12,7 +12,7 @@ public class Property {
     final private String phoneNumber;
     final private boolean isBrokers;
 
-    public Property(City city, User user) {
+    public Property(City city,String street, String userName, boolean isForRenting, String phoneNumber,boolean isBroker,int floor, int type, int amountOfRooms, int price, int houseNumber) {
         this.city = city;
         this.street = street;
         this.sellerName = userName;

@@ -451,4 +451,24 @@ public class RealEstate {
     }
     return filteredProperties;
   }
+  public void addUser(User user){
+    User[] users = new User[usersArray.length+1];
+    if(usersArray.length == 0){
+      users[0] = user;
+    }
+    else {
+      for (int i = 0; i <= users.length; i++) {
+        if (i == users.length) {
+          users[i] = user;
+        } else {
+          usersArray[i] = users[i] ;
+        }
+      }
+    }
+    setUsersArray(users);
+    counter++;
+  }
+  public User[] getUsersArray() {
+    return usersArray;
+  }
 }
