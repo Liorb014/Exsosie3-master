@@ -84,16 +84,7 @@ public class RealEstate {
     if (isBroker.equals("n")) {
       broker = false;
     }
-    User newUser = new User(username, password, phoneNumber, broker);
-    addUser(newUser);
-  /*
-    User[] tempUsers = new User[countOfUsers+1];
-    int i=0;
-    for (i = 0; i < usersArray.length; i++) {
-      tempUsers[i]= usersArray[i];
-    }
-    tempUsers[countOfUsers-1] = newUser;
-    usersArray = Arrays.copyOf(tempUsers,usersArray.length+1);*/
+    addUser1( username, password, phoneNumber, broker);
     System.out.println(Arrays.toString(usersArray));
 
   }
@@ -127,8 +118,7 @@ public class RealEstate {
     boolean isUsernameValid = false;
     boolean isPasswordValid = false;
     User loginInfoValid = null;
-    for (int i = 0; i <= usersArray.length; i++) {
-
+    for (int i = 0; i <= usersArray.length-1; i++) {
       if (usersArray[i].getUserName().equals(usernameLogin)) {
         isUsernameValid = true;
         if (usersArray[i].getPassword().equals(passwordLogin)) {
@@ -146,9 +136,10 @@ public class RealEstate {
 
   int postCount = 0;
   boolean postNewProperty(User user) {
-    int counterOfCities=0;
+    // int counterOfCities=0;
     Scanner scanner = new Scanner(System.in);
     if ((user.getIsBrokers() && postCount == 5) || (!user.getIsBrokers() && postCount == 2)) {
+      System.out.println("max post count reached");
       return false;
     }
     String streetOfNewProperty ;

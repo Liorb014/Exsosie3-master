@@ -3,7 +3,8 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        menu();
+        RealEstate realEstate = new RealEstate();
+        menu(realEstate);
     }
 
     public static void menu(RealEstate realEstate){
@@ -15,7 +16,8 @@ public class Main {
             userChoose=scanner.nextInt();
         }while (userChoose<1|| userChoose>3);
         if (userChoose==1){
-            realEstate.createUser();
+          realEstate.createUser();
+          menu(realEstate);
         } else if (userChoose==2) {
             User user =realEstate.login();
             if (user==null){
@@ -29,12 +31,12 @@ public class Main {
     public static void subMenu(User user){
         Scanner scanner = new Scanner(System.in);
         RealEstate realEstate = new RealEstate();
-        System.out.println("press 1 to make new post");
-        System.out.println("press 2 to remove post");
-        System.out.println("press 3 to to see all the properties");
-        System.out.println("press 4 to to see all your properties");
-        System.out.println("press 5 to to search for properties");
-        System.out.println("press 6 to to search for properties");
+        System.out.println(" 1 to make new post");
+        System.out.println(" 2 to remove post");
+        System.out.println(" 3 to to see all the properties");
+        System.out.println(" 4 to to see all your properties");
+        System.out.println(" 5 to to search for properties");
+        System.out.println(" 6  to logout");
         int userChoose;
         do {
             userChoose= scanner.nextInt();
@@ -60,7 +62,8 @@ public class Main {
             subMenu(user);
         }
         else if(userChoose == 6){
-            System.out.println("back to the main");
+            System.out.println("back to the main menu");
+            menu(realEstate);
         }
     }
 }

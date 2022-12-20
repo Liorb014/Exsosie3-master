@@ -15,11 +15,16 @@ public class City {
     public String getArea(){
         return this.area;
     }
-    public String getListOfStreets(){
-        return Arrays.toString(listOfStreets);
+   // public String getListOfStreets(){
+     //   return Arrays.toString(listOfStreets);
+   // }
+
+    public String[] getListOfStreets() {
+        return listOfStreets;
     }
+
     public String toString(){
-        return "City name : " + cityName + "\nArea : " + area +"\n List of streets :" + getListOfStreets() ;
+        return "City name : " + cityName + "\nArea : " + area +"\n List of streets :" + Arrays.toString(getListOfStreets()) ;
     }
 }
 
