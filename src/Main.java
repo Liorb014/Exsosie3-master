@@ -6,12 +6,10 @@ public class Main {
         menu();
     }
 
-    public static void menu(){
-        RealEstate realEstate = new RealEstate();
+    public static void menu(RealEstate realEstate){
 
         Scanner scanner = new Scanner(System.in);
         int userChoose;
-
         do {
             System.out.println("welcome to 'yad 2' \n please choose : \n  1  - to create user \n 2 - to login \n 3 - to exit ");
             userChoose=scanner.nextInt();
@@ -21,7 +19,7 @@ public class Main {
         } else if (userChoose==2) {
             User user =realEstate.login();
             if (user==null){
-                menu();
+                menu(realEstate);
             }else {
                 subMenu(user);
             }
@@ -43,18 +41,23 @@ public class Main {
         }while (userChoose<1 || userChoose>6);
         if(userChoose == 1){
             realEstate.postNewProperty(user);
+            subMenu(user);
         }
         else if(userChoose == 2){
             realEstate.removeProperty(user);
+            subMenu(user);
         }
         else if(userChoose == 3){
             realEstate.printAllProperties();
+            subMenu(user);
         }
         else if(userChoose == 4){
             realEstate.printProperties(user);
+            subMenu(user);
         }
         else if(userChoose == 5){
             realEstate.search();
+            subMenu(user);
         }
         else if(userChoose == 6){
             System.out.println("back to the main");
