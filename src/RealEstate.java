@@ -6,8 +6,11 @@ public class RealEstate {
   private City[] cities;
 
 
-  public RealEstate(User user, City city) {
+  public RealEstate() {
     matchArea();
+  }
+  public void setUsersArray(User[] usersArray) {
+    this.usersArray = usersArray;
   }
 
   private void matchArea() {
@@ -33,7 +36,7 @@ public class RealEstate {
           cities[i] = new City(arrayOfCity[i], arrayOfArea[4], arrayOfStreets);
         }
       }
-    }
+   }
   }
 
   public void createUser() {
@@ -44,16 +47,16 @@ public class RealEstate {
     if (usersArray[0] != null) {
       do {
         username = scanner.nextLine();
-        alreadyUse = false;
+        alreadyUsed = false;
         for (int i = 0; i < usersArray.length; i++) {
           if (username.equals(usersArray[i].getUserName())) {
-            alreadyUse = true;
+            alreadyUsed = true;
             System.out.println("this username is already taken, please choose another username");
             username = scanner.nextLine();
             break;
           }
         }
-      } while (alreadyUse);
+      } while (alreadyUsed);
     } else {
       username = scanner.nextLine();
 
@@ -85,11 +88,17 @@ public class RealEstate {
       broker = false;
     }
     User newUser = new User(username, password, phoneNumber, broker);
-    for (int i = 0; i < usersArray.length; i++) {
-      if (usersArray[i] == null) {
-        usersArray[i] = newUser;
-      }
+    addUser(newUser);
+  /*
+    User[] tempUsers = new User[countOfUsers+1];
+    int i=0;
+    for (i = 0; i < usersArray.length; i++) {
+      tempUsers[i]= usersArray[i];
     }
+    tempUsers[countOfUsers-1] = newUser;
+    usersArray = Arrays.copyOf(tempUsers,usersArray.length+1);*/
+    System.out.println(Arrays.toString(usersArray));
+    Main.menu();
   }
 
   private static boolean isValidPassword(String password) {
@@ -121,20 +130,20 @@ public class RealEstate {
     String passwordLogin = scanner.next();
     boolean isUsernameValid = false;
     boolean isPasswordValid = false;
-    int count = 0;
-    for (int i = 0; i < usersArray.length; i++) {
+    User loginInfoValid = null;
+    for (int i = 0; i <= usersArray.length; i++) {
+
       if (usersArray[i].getUserName().equals(usernameLogin)) {
         isUsernameValid = true;
-        count = i;
-        break;
+        if (usersArray[i].getPassword().equals(passwordLogin)) {
+          isPasswordValid = true;
+          if (isUsernameValid && isPasswordValid) {
+            loginInfoValid = usersArray[i];
+          }else {
+            System.out.println("incorrect username or password");
+          }
+        }
       }
-    }
-    if (usersArray[count].getPassword().equals(passwordLogin)) {
-      isPasswordValid = true;
-    }
-    User loginInfoValid = null;
-    if (isUsernameValid && isPasswordValid) {
-      loginInfoValid = usersArray[count];
     }
     return loginInfoValid;
   }
@@ -150,40 +159,93 @@ public class RealEstate {
       System.out.println(cities[i].getCityName());
       System.out.println("please enter your city of your property: ");
       String cityOfNewProperty = scanner.nextLine();
+      String streetOfNewProperty = null;
+      boolean isPropertyForRent = false;
+      int floorNumber = 0;
+      int typeOfHouse = 0;
+      int numberOfRooms =0;
+      int priceOfProperty=0;
+      int numberOfProperty = 0;
       if (cityOfNewProperty.equals(cities[i].getCityName())) {
         System.out.println(cities[i].getListOfStreets());
         System.out.println("please enter the street name of your new property:");
-        String streetOfNewProperty =scanner.nextLine();
-        if (streetOfNewProperty.equals(cities[i].getListOfStreets())){
-          System.out.println("please choose which type of house u have: "+"\n enter 1 to an apartment"+"\n enter 2 to a penthouse"+"\n enter 3 to a detachment home");
-          int typeOfHouse= scanner.nextInt();
+        streetOfNewProperty = scanner.nextLine();
+        if (streetOfNewProperty.equals(cities[i].getListOfStreets())) {
+          System.out.println("please choose which type of house u have: " + "\n enter 1 to an apartment" + "\n enter 2 to a penthouse" + "\n enter 3 to a detachment home");
+          typeOfHouse = scanner.nextInt();
           if (typeOfHouse != 1 || typeOfHouse != 2 || typeOfHouse != 3) {
             System.out.println("please enter an option between 1-3!");
             return false;
-          }else {
-            if(typeOfHouse==1){
+          } else {
+            if (typeOfHouse == 1) {
               System.out.println("please enter the floor number of your property");
-              int floorNumber =scanner.nextInt();
-              propertyOfUserInfo();
+              floorNumber = scanner.nextInt();
+              System.out.println("How much rooms are there in this property");
+              numberOfRooms = scanner.nextInt();
+              System.out.println("Please enter the number of the property: ");
+              numberOfProperty = scanner.nextInt();
+              System.out.println("If the property is for rent enter 1 if it for sale enter 2");
+              int forRentOrForSale = scanner.nextInt();
+              while (forRentOrForSale != 1 && forRentOrForSale != 2) {
+                System.out.println("If for rent enter 1 - if for sale enter 2");
+                forRentOrForSale = scanner.nextInt();
+              }
+              isPropertyForRent = false;
+              if (forRentOrForSale == 1) {
+                isPropertyForRent = true;
+              }
+              System.out.println("Please enter the price of the property: ");
+              priceOfProperty = scanner.nextInt();
             }
-            if(typeOfHouse==2){
-              propertyOfUserInfo();
+            if (typeOfHouse == 2) {
+              System.out.println("How much rooms are there in this property");
+              numberOfRooms = scanner.nextInt();
+              System.out.println("Please enter the number of the property: ");
+              numberOfProperty = scanner.nextInt();
+              System.out.println("If the property is for rent enter 1 if it for sale enter 2");
+              int forRentOrForSale = scanner.nextInt();
+              while (forRentOrForSale != 1 && forRentOrForSale != 2) {
+                System.out.println("If for rent enter 1 - if for sale enter 2");
+                forRentOrForSale = scanner.nextInt();
+              }
+              isPropertyForRent = false;
+              if (forRentOrForSale == 1) {
+                isPropertyForRent = true;
+              }
+              System.out.println("Please enter the price of the property: ");
+              priceOfProperty = scanner.nextInt();
             }
-            if(typeOfHouse==3){
-              propertyOfUserInfo();
+            if (typeOfHouse == 3) {
+              System.out.println("How much rooms are there in this property");
+              numberOfRooms = scanner.nextInt();
+              System.out.println("Please enter the number of the property: ");
+              numberOfProperty = scanner.nextInt();
+              System.out.println("If the property is for rent enter 1 if it for sale enter 2");
+              int forRentOrForSale = scanner.nextInt();
+              while (forRentOrForSale != 1 && forRentOrForSale != 2) {
+                System.out.println("If for rent enter 1 - if for sale enter 2");
+                forRentOrForSale = scanner.nextInt();
+              }
+              isPropertyForRent = false;
+              if (forRentOrForSale == 1) {
+                isPropertyForRent = true;
+              }
+              System.out.println("Please enter the price of the property: ");
+              priceOfProperty = scanner.nextInt();
             }
           }
-        }else {
+        } else {
           System.out.println("your property is not in our system database ");
           return false;
         }
-      } else if (counterOfCities==cities.length) {
+      } else if (counterOfCities == cities.length) {
         System.out.println("your property is not in our system database ");
         return false;
       } else {
         counterOfCities++;
       }
-      properties[i]= new Property(cities[i],usersArray[i]);
+      properties[i] = new Property(cities[i], streetOfNewProperty, user.getUserName(),
+              isPropertyForRent, user.getPhoneNumber(), user.getIsBrokers(), floorNumber, typeOfHouse, numberOfRooms,priceOfProperty,numberOfProperty );
     }
     return true;
   }
@@ -254,12 +316,14 @@ public class RealEstate {
       }
     }
   }
+
   void printAllProperties(){
 
     for (int i = 0; i < properties.length; i++) {
       System.out.println(properties[i]);
     }
   }
+
   void printProperties (User user){
     for (int i = 0; i < properties.length; i++) {
       if (user.getUserName()==properties[i].getSellerName()){
@@ -268,20 +332,122 @@ public class RealEstate {
     }
   }
   Property[] search (){
+    final int IGNORE = -999;
     Scanner scanner = new Scanner(System.in);
-    System.out.println("please choose which type of house u have: "+"\n enter 1 to an apartment"+"\n enter 2 to a penthouse"+"\n enter 3 to a detachment home");
+    System.out.println(" hello welcome to the search panel please make sure to put the right values, if u want to not use one of the filter write -999! ");
+    System.out.println("please choose which type of house u want: "+"\n enter 1 to an apartment"+"\n enter 2 to a penthouse"+"\n enter 3 to a detachment home");
     int typeOfHouse= scanner.nextInt();
-    if (typeOfHouse != 1 || typeOfHouse != 2 || typeOfHouse != 3) {
+    if (typeOfHouse != 1 || typeOfHouse != 2 || typeOfHouse != 3||typeOfHouse != -999) {
       System.out.println("please enter an option between 1-3!");
+      typeOfHouse= scanner.nextInt();
     }
-    System.out.println("for rent or for sell");
+    System.out.println("please enter which house condition u desire (for rent or for sell) for rent, enter 'rent', or for sell, enter 'sell'");
     String sellOrRent = scanner.nextLine();
-    if (sellOrRent.contains("rent") || sellOrRent.contains("sell")){
-
+    boolean isForRent = false;
+    if(sellOrRent.equals("rent")){
+      isForRent = true;
+    }else if(sellOrRent.equals("-999")){
+      sellOrRent = String.valueOf(IGNORE);
     }
-    System.out.println();
-    System.out.println();
-    System.out.println();
-    return new Property[0];
+    else {
+      while ((!sellOrRent.equals("rent") || !sellOrRent.equals("sell"))&& !sellOrRent.equals("-999")) {
+        System.out.println("u putted unmatched context , please try again  ");
+        sellOrRent = scanner.nextLine();
+      }
+    }
+    System.out.println("Please enter the amount of rooms in the house");
+    int amountOfRooms = scanner.nextInt();
+    while(amountOfRooms <=0 && amountOfRooms != IGNORE){
+      System.out.println("Please try again, enter a number which is bigger than 0, or -999");
+      amountOfRooms = scanner.nextInt();
+    }
+    System.out.println("Please enter the range of prices you want to choose by (now enter minimum): ");
+    int minPrice = scanner.nextInt();
+    int maxPrice=0;
+    if(minPrice != IGNORE) {
+      System.out.println("now enter maximum: ");
+      maxPrice = scanner.nextInt();
+      while (maxPrice < minPrice && maxPrice != IGNORE) {
+        System.out.println("minimum bigger then maximum ");
+        System.out.println("enter again the maximum price: ");
+        maxPrice = scanner.nextInt();
+      }
+    }
+    int counter = 0;
+    int[] index =new int[properties.length];
+    for (int i = 0; i < properties.length; i++) {
+      index[i] = i ;
+    }
+    if (!sellOrRent.equals(String.valueOf(IGNORE))){
+      int[] tempIndex = new int[properties.length];
+      for (int i = 0; i < index.length; i++) {
+        if(properties[i].getIsForRenting() == isForRent) {
+          tempIndex[counter] = i;
+          counter++;
+        }
+      }
+      for (int j = 0; j < counter ; j++) {
+        index = Arrays.copyOf(tempIndex,counter);
+        counter=0;
+      }
+    }
+    if (!(typeOfHouse == IGNORE)){
+      int[] tempIndex = new int[properties.length];
+      for (int i = 0; i < index.length; i++) {
+        if(properties[i].getType() == typeOfHouse) {
+          tempIndex[counter] = i;
+          counter++;
+        }
+      }
+      for (int j = 0; j < counter ; j++) {
+        index = Arrays.copyOf(tempIndex,counter);
+        counter=0;
+      }
+    }
+    if (!(amountOfRooms == IGNORE)){
+      int[] tempIndex = new int[properties.length];
+      for (int i = 0; i < index.length; i++) {
+        if(properties[i].getAmountOfRooms() == amountOfRooms) {
+          tempIndex[counter] = i;
+          counter++;
+        }
+      }
+      for (int j = 0; j < counter ; j++) {
+        index = Arrays.copyOf(tempIndex,counter);
+        counter=0;
+      }
+    }
+    if (!(maxPrice == IGNORE)){
+      int[] tempIndex = new int[properties.length];
+      for (int i = 0; i < index.length; i++) {
+        if(properties[i].getPrice() <= typeOfHouse) {
+          tempIndex[counter] = i;
+          counter++;
+        }
+      }
+      for (int j = 0; j < counter ; j++) {
+        index = Arrays.copyOf(tempIndex,counter);
+        counter=0;
+      }
+    }
+    if (!(minPrice == IGNORE)){
+      int[] tempIndex = new int[properties.length];
+      for (int i = 0; i < index.length; i++) {
+        if(properties[i].getPrice() >= typeOfHouse) {
+          tempIndex[counter] = i;
+          counter++;
+        }
+      }
+      for (int j = 0; j < counter ; j++) {
+        index = Arrays.copyOf(tempIndex,counter);
+        counter=0;
+      }
+    }
+    Property[] filteredProperties = new Property[index.length];
+    for (int i = 0; i < index.length ; i++) {
+      filteredProperties[index[counter]] = properties[i];
+      counter++;
+    }
+    return filteredProperties;
   }
 }

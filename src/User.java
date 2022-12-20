@@ -2,8 +2,9 @@ public class User {
     final private String userName;
     final private String password;
     final private String phoneNumber;
-    final  private boolean isBrokers;
-    public User(String userName, String password,  String phoneNumber,boolean isBrokers ){
+    final private boolean isBrokers;
+
+    public User(String userName, String password, String phoneNumber, boolean isBrokers) {
         this.userName = userName;
         this.password = password;
         this.phoneNumber = phoneNumber;

@@ -1,10 +1,9 @@
 public class Property {
 
     final private City city;
-    final private String area;
     private String street;
     private int amountOfRooms;
-    private double price;
+    private int price;
     private int type;
     private boolean isForRenting;
     private int houseNumber;
@@ -15,40 +14,18 @@ public class Property {
 
     public Property(City city, User user) {
         this.city = city;
-        this.area = city.getArea();
-        this.sellerName = user.getUserName();
-        this.phoneNumber = user.getPhoneNumber();
-        this.isBrokers = user.getIsBrokers();
-    }
-
-    public void setFloor(int floor) {
-        this.floor = floor;
-    }
-
-    public void setHouseNumber(int houseNumber) {
-        this.houseNumber = houseNumber;
-    }
-
-    public void setType(int type) {
-        this.type = type;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public void setAmountOfRooms(int amountOfRooms) {
-        this.amountOfRooms = amountOfRooms;
-    }
-
-    public void setForRenting(boolean forRenting) {
-        isForRenting = forRenting;
-    }
-
-    public void setStreet(String street) {
         this.street = street;
-    }
+        this.sellerName = userName;
+        this.phoneNumber = phoneNumber;
+        this.isBrokers = isBroker;
+        this.type = type;
+        this.floor = floor;
+        this.amountOfRooms = amountOfRooms;
+        this.price =  price;
+        this.houseNumber = houseNumber;
+        this.isForRenting = isForRenting;
 
+     }
     public double getPrice() {
         return price;
     }
@@ -81,11 +58,7 @@ public class Property {
         return type;
     }
 
-    public String getArea() {
-        return area;
-    }
-
-    public boolean isForRenting() {
+    public boolean getIsForRenting() {
         return isForRenting;
     }
 
