@@ -1,7 +1,9 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class RealEstate {
-  private User[] usersArray;
+  int counter=0;
+  public User[] usersArray = new User[counter];
   private Property[] properties;
   public City[] cities;//=new City[10]
 
@@ -42,8 +44,8 @@ public class RealEstate {
     Scanner scanner = new Scanner(System.in);
     System.out.println("please enter a user name: ");
     String username;
-    boolean alreadyUse;
-    if (usersArray[0] != null) {
+    boolean alreadyUsed;
+    if (usersArray != null) {
       do {
         username = scanner.nextLine();
         alreadyUsed = false;

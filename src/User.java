@@ -10,15 +10,19 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.isBrokers = isBrokers;
     }
-    public String getPassword(){
+
+    public String getPassword() {
         return this.password;
     }
-    public String getUserName(){
+
+    public String getUserName() {
         return this.userName;
     }
+
     public boolean getIsBrokers() {
         return this.isBrokers;
     }
+
     public String getPhoneNumber() {
         return phoneNumber;
     }
