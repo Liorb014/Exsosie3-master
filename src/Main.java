@@ -19,7 +19,6 @@ public class Main {
         if (userChoose==1){
             realEstate.createUser();
         } else if (userChoose==2) {
-            System.out.println(realEstate.usersArray);
             User user =realEstate.login();
             if (user==null){
                 menu();
